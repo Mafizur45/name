@@ -37,3 +37,9 @@ Route::put('/products/{product}', [ProductController::class, 'update'])->name('p
 
 // Delete product
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+
+Route::get('/products/export', [ProductController::class, 'export'])->name('product.export');
+Route::post('/products/import', [ProductController::class, 'import'])->name('product.import');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

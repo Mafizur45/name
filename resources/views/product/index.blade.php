@@ -33,6 +33,18 @@
         <a href="{{ route('product.create') }}" class="btn btn-success">+ Create Product</a>
     </div>
 
+    <!-- excel -->
+     <!-- Import/Export -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <form action="{{ route('product.import') }}" method="POST" enctype="multipart/form-data" class="d-flex gap-2">
+        @csrf
+        <input type="file" name="import_file" class="form-control" required>
+        <button type="submit" class="btn btn-outline-success">Import Excel</button>
+    </form>
+
+    <a href="{{ route('product.export') }}" class="btn btn-outline-primary">Export to Excel</a>
+</div>
+
     <!-- Search Form -->
     <form action="{{ route('product.index') }}" method="GET" class="mb-4">
         <div class="input-group">

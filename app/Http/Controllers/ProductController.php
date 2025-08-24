@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Imports\ProductsImport;
+use App\Exports\ProductsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -74,4 +77,21 @@ class ProductController extends Controller
 
         return redirect()->route('product.index')->with('success', 'Product deleted successfully.');
     }
+
+    public function export()
+{
+    return Excel::download(new ProductsExport, 'products.xlsx');
+    
+}
+
+public function import(Request $request)
+{
+    $request->validate([
+        'import_file' => 'required|mimes:xlsx,xls,csv'
+    ]);
+
+    Excel::import(new ProductsImport, $request->file('import_file'));
+
+    return redirect()->route('product.index')->with('success', 'Products imported successfully!');
+}
 }
